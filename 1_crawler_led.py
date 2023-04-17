@@ -244,7 +244,7 @@ else:
 for p in range(1,max_page+1):
 
     if len(CRAWLED[p]) != 50 or NEW_DATE:
-
+        driver.switch_to.window(driver.window_handles[0])
         driver.get(f'https://asset.led.go.th/newbid-old/asset_search_province.asp?search_asset_type_id=&search_tumbol=&search_ampur=&search_province={search_province}&search_sub_province=&search_price_begin=&search_price_end=&search_bid_date=&page={p}')
         
         u = '/html/body/table[3]/tbody/tr/td[1]/table[2]/tbody/tr/td[2]/div'
