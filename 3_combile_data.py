@@ -3,8 +3,8 @@ import sys
 from datetime import datetime
 import csv
 
-province = 'nonthaburi'
-# province = sys.argv[1]
+#province = 'nonthaburi'
+province = sys.argv[1]
 
 print('\n\n\n','='*200)
 print('3_combile_data')
