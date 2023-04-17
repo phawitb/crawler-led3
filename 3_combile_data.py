@@ -20,6 +20,7 @@ print(row[0])
 READY = False
 if row[0] == 'True':
     READY = True
+READY = True
 #=============
 
 if READY:
