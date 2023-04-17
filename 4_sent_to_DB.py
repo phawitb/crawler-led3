@@ -4,6 +4,15 @@ import sys
 from datetime import datetime
 import csv
 import configure
+import requests
+
+TOKEN_GROUP_ALL = 'kxteNhOdjgRqIaZWxMVIb0LnirbrTfl9xXk6CnCf24D'
+
+def line_noti(token,msg):
+    url = 'https://notify-api.line.me/api/notify'
+    headers = {'content-type':'application/x-www-form-urlencoded','Authorization':'Bearer '+token}
+    r = requests.post(url, headers=headers, data = {'message':msg})
+    return r.text
 
 def isoDate(b,k):
     if k == 'bit_date':
@@ -40,6 +49,8 @@ province = sys.argv[1]
 print('\n\n\n','='*200)
 print('4_sent_to_DB.py')
 
+line_noti(TOKEN_GROUP_ALL,'Start! ---> 4_sent_to_DB.py')
+
 client = pymongo.MongoClient("mongodb+srv://phawit:Signal3499@cluster0.p81pf.mongodb.net/?retryWrites=true&w=majority")
 db = client.property
 
@@ -69,6 +80,7 @@ P = {
 }
 
 print(P)
+line_noti(TOKEN_GROUP_ALL,f'{P}')
 
 collection_provinces = db.provinces
 A = collection_provinces.find_one_and_update({"_id":index}, {"$set" : P}, upsert = False )
@@ -192,6 +204,7 @@ for D in chage_list:
     print(D)
 
 print('Finish sent data to mongoDB')
+line_noti(TOKEN_GROUP_ALL,f'Finish sent data to mongoDB update{len(chage_list)}')
 
 with open(f'../data/{province}_combile_last.json', 'r') as openfile:
         CB1 = json.load(openfile)
