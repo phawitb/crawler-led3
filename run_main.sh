@@ -34,6 +34,6 @@ else
 
     git clone https://github.com/phawitb/crawler-led3.git
 
-    # cd crawler-led3 && bash run.sh
+    cd crawler-led3 && bash run.sh
 
 fi
