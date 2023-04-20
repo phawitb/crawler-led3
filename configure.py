@@ -1,6 +1,6 @@
 START_FIRST_PAGE = True
 
-chrome_headless = False
+chrome_headless = True
 
 force_updateDB = True
 
