@@ -90,18 +90,17 @@ def find_gps(thai_province,aumper,deed_no):
 
     if thai_province == 'กรุงเทพฯ':
         thai_province = 'กรุงเทพมหานคร'
-    aumper = aumper.replace('(',' ').replace(')','')
-    aumper = aumper.split()
+    if '(' in aumper:
+        aumper = aumper.replace('(',' ').replace(')','').split()
+    else:
+        aumper = [aumper]
     aumper = [x.strip() for x in aumper]
-    # aumper = aumper.split()
-    # aumper = [x.replace('(',' ').replace(')',' ') for x in aumper]
-    # aumper = [x.split() for x in aumper]
-    a = []
-    aumper = [[a.append(xx) for xx in x] for x in aumper]
-    aumper = list(set(a))
+#     print('aumper',aumper)
 
     if thai_province not in aumphers.keys():
         aumphers[thai_province] = list_aumphers(thai_province)
+        
+#     print('aumphers[thai_province] ',aumphers[thai_province] )
 
     aums = []
     for a in aumper:
@@ -153,9 +152,10 @@ chrome_headless = configure.chrome_headless
 options = webdriver.ChromeOptions()
 if chrome_headless:
     options.add_argument("headless")
-options.add_argument('window-size=800x600')
+# options.add_argument('window-size=800x600')
+options.add_argument('window-size=1920x1080')
 driver = webdriver.Chrome(ChromeDriverManager(version=configure.chrome_version).install(),chrome_options=options)   #-----------------
-driver.maximize_window()
+# driver.maximize_window()
 print('driver.get_window_size()',driver.get_window_size())
 
 driver.get('https://landsmaps.dol.go.th/')
@@ -223,12 +223,13 @@ for i,k in enumerate(data.keys()):
             print(d,'thai_province',thai_province,'aumper',aumper)
             a = find_gps(thai_province,aumper,d)
             if a:
-                # line_noti(TOKEN_GROUP_ALL,f'find GPS from website,{a}')
+                line_noti(TOKEN_GROUP_ALL,f'find GPS from website,{a}')
+                print(f'find GPS from website,{a}')
                 gps_data[str(d)] = a
                 with open(f"../data/{province}_gps_data.json", "w") as outfile:
                     outfile.write(json.dumps(gps_data, indent=4))
             else:
                 print('Not find gps from website',a)
-                # line_noti(TOKEN_GROUP_ALL,f'Not find gps from website,{a}')
+                line_noti(TOKEN_GROUP_ALL,f'Not find gps from website,{a}')
         
 line_noti(TOKEN_GROUP_ALL,f'Finish process2')
