@@ -1,14 +1,16 @@
 #copy to ../crawler-led3
 
+sleep 10
+
 DIR="crawler-led3"
 if [ -d "$DIR" ]; then
   ### Take action if $DIR exists ###
-  echo "exist ${DIR}"
+  echo "1exist ${DIR}"
 
 else
   ###  Control will jump here if $DIR does NOT exists ###
-  echo "not exist floder ${DIR}"
-  exit 1
+  echo "1not exist floder ${DIR}"
+  # exit 1
 fi
 
 if [[ "$(ping -c 1 8.8.8.8 | grep '100% packet loss' )" != "" ]]; then
@@ -29,10 +31,12 @@ else
     else
         ###  Control will jump here if $DIR does NOT exists ###
         echo "not exist floder ${DIR}"
-        exit 1
+        # exit 1
     fi
 
     git clone https://github.com/phawitb/crawler-led3.git
+
+    sleep 5
 
     cd crawler-led3 && bash run.sh
 
