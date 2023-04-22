@@ -251,6 +251,7 @@ for p in range(1,max_page+1):
         page = WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH, u)))
         page = get_text(u)
         current_page,max_page = [int(x) for x in page.split()[-1].split('/')]
+        total_page = int(page.split()[2])
         print(f"\n\n\ncurrent_page {current_page}/max_page {max_page}")
 
         line_noti(TOKEN_GROUP_ALL,f'current_page {current_page}/max_page {max_page}')
@@ -309,8 +310,8 @@ for p in range(1,max_page+1):
                     # with open(f"../data/{province}_currentlink.json", "w") as outfile:
                     #     outfile.write(json.dumps(C, indent=4))
 
-                    print('Error',e)
-                    line_noti(TOKEN_GROUP_ALL,f'Error : {e}')
+                    print(f'Error : row:{r}/page:{current_page}')
+                    line_noti(TOKEN_GROUP_ALL,f'Error : row:{r}/page:{current_page}')
                     driver.switch_to.window(driver.window_handles[0])
 
             else:
@@ -330,10 +331,13 @@ if len(list(C[dtn].keys())) > (int(max_page)-1)*40:
     with open('../data/stage.csv', 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(['True'])
+        line_noti(TOKEN_GROUP_ALL,f'Write complate stage= True crawler_data={len(list(C[dtn].keys()))} from total={total_page}')
 else:
     print('nnnn')
     with open('../data/stage.csv', 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(['False'])
+        # line_noti(TOKEN_GROUP_ALL,f'Error : row:{r}/page:{current_page}')
+        line_noti(TOKEN_GROUP_ALL,f'Write complate stage= False crawler_data={len(list(C[dtn].keys()))} from total={total_page}')
             
         
