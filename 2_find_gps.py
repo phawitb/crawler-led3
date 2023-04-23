@@ -118,7 +118,7 @@ def find_gps(thai_province,aumper,deed_no):
             sent_key('/html/body/nav/form[3]/span/input',deed_no)
 
             click('/html/body/nav/form[4]/button')
-            time.sleep(6)
+            time.sleep(2)
             box = read_box()
         #     click('/html/body/div[1]/div[3]/span/div/div[1]/button')
             return box
