@@ -6,7 +6,7 @@ import csv
 import configure
 import requests
 
-TOKEN_GROUP_ALL = 'kxteNhOdjgRqIaZWxMVIb0LnirbrTfl9xXk6CnCf24D'
+TOKEN_GROUP_ALL = '1hZqXJ1UwUlSD2eIIMjnobPb5PkoQIKT70Y0IR5SAzt'
 
 def line_noti(token,msg):
     url = 'https://notify-api.line.me/api/notify'
