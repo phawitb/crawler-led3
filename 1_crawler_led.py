@@ -16,7 +16,7 @@ import requests
 
 time.sleep(10)
 
-TOKEN_GROUP_ALL = 'kxteNhOdjgRqIaZWxMVIb0LnirbrTfl9xXk6CnCf24D'
+TOKEN_GROUP_ALL = '1hZqXJ1UwUlSD2eIIMjnobPb5PkoQIKT70Y0IR5SAzt'
 
 with open('../data/stage.csv', 'w', newline='') as file:
     writer = csv.writer(file)
